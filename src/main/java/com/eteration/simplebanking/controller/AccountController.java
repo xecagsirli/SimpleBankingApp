@@ -19,7 +19,7 @@ public class AccountController {
     }
 
     @PostMapping(value = "/credit")
-    public ResponseEntity<TransactionStatus> credit(@RequestBody String balance, DepositTransaction depositTransaction ) {
+    public ResponseEntity<TransactionStatus> credit(@RequestBody String accountNumber, DepositTransaction depositTransaction ) {
         Account account = getAccount("").getBody();
         account.deposit(account.getBalance());
         return ResponseEntity.ok().body(new TransactionStatus());
@@ -27,7 +27,7 @@ public class AccountController {
     }
 
     @PostMapping(value = "/debit")
-    public ResponseEntity<TransactionStatus> debit(@RequestBody String balance, WithdrawalTransaction depositTransaction ) throws InsufficientBalanceException {
+    public ResponseEntity<TransactionStatus> debit(@RequestBody String accountNumber, WithdrawalTransaction depositTransaction ) throws InsufficientBalanceException {
         Account account = getAccount("").getBody();
         account.withdraw(account.getBalance());
         return ResponseEntity.ok().body(new TransactionStatus());
