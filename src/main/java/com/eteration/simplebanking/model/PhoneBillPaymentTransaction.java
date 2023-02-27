@@ -1,5 +1,7 @@
 package com.eteration.simplebanking.model;
 
+//Bir transaction ya withdraw, ya deposit olacağı için yeni yapılacak BillPaymentTransaction classı
+// WithdrawalTransaction altına gelecektir.
 public class PhoneBillPaymentTransaction extends WithdrawalTransaction{
 
     private String payee;

@@ -60,7 +60,6 @@ public class Account {
     }
 
     public void post(Transaction transaction) throws InsufficientBalanceException {
-        //bir transaction ya withdraw ya deposittr, yeni yapılacak class altına gelir
         if(transaction instanceof WithdrawalTransaction){
             withdraw(transaction.getAmount());
         }

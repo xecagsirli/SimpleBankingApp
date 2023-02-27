@@ -7,6 +7,8 @@ import java.time.LocalDateTime;
 public abstract class Transaction {
     protected LocalDateTime date;
     protected double amount;
+    protected String type; //enum da olabilirdi
+    protected String approvalCode;
 
     public Transaction(double amount) {
         this.amount = amount;
@@ -34,5 +36,21 @@ public abstract class Transaction {
 
     public void setAmount(double amount) {
         this.amount = amount;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getApprovalCode() {
+        return approvalCode;
+    }
+
+    public void setApprovalCode(String approvalCode) {
+        this.approvalCode = approvalCode;
     }
 }

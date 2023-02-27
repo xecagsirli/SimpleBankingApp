@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 // This class is a place holder you can change the complete implementation
 public class AccountController {
 
-
     @GetMapping(value = "/{accountNumber}", produces = "application/json")
     public ResponseEntity<Account> getAccount(@PathVariable String accountNumber) {
         return ResponseEntity.ok().body(new Account("",""));
