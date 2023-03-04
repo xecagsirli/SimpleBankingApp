@@ -8,10 +8,10 @@ import java.util.List;
 public class Account {
     private String owner;
     private String accountNumber;
-    private double balance;
+    private double balance = 0;
     private List<Transaction> transactions;
 
-    public Account(String owner, String balance) {
+    public Account(String owner, String accountNumber) {
     }
 
     public String getOwner() {
@@ -46,10 +46,12 @@ public class Account {
         this.transactions = transactions;
     }
 
+    //credit
     public void deposit(double amount) {
         balance += amount;
     }
 
+    //debit
     public void withdraw(double amount) throws InsufficientBalanceException {
         if(amount<balance){
             balance -= amount;
@@ -66,5 +68,6 @@ public class Account {
         else if(transaction instanceof DepositTransaction) {
             deposit(transaction.getAmount());
         }
+        transactions.add(transaction);
     }
 }

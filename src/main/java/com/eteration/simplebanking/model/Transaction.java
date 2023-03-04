@@ -12,6 +12,7 @@ public abstract class Transaction {
 
     public Transaction(double amount) {
         this.amount = amount;
+        date = LocalDateTime.now();
     }
 
     @Override

@@ -5,5 +5,7 @@ package com.eteration.simplebanking.model;
 public class DepositTransaction extends Transaction {
     public DepositTransaction(double amount) {
         super(amount);
+        setType("Deposit Transaction");
+        setApprovalCode("67f1aada-637d-4469-a650-3fb6352527ba");
     }
 }
