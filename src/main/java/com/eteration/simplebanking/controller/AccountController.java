@@ -18,9 +18,17 @@ public class AccountController {
     @Autowired
     AccountService accountService;
 
+    @Autowired
+    Account account;
+
     @GetMapping(value = "/{accountNumber}", produces = "application/json")
     public ResponseEntity<Account> getAccount(@PathVariable String accountNumber) {
-        return ResponseEntity.ok().body(new Account("",""));
+        Account account1 = null;
+        for(int i=0; i<account.getAccountList().size(); i++){
+            if(account.getAccountList().get(i).getAccountNumber().equals(accountNumber))
+                account1 = account.getAccountList().get(i);
+        }
+        return ResponseEntity.ok().body(account1);
     }
 
     @PostMapping(value = "/credit")

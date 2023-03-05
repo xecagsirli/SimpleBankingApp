@@ -3,6 +3,7 @@ package com.eteration.simplebanking.model;
 
 // This class is a place holder you can change the complete implementation
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Account {
@@ -10,8 +11,12 @@ public class Account {
     private String accountNumber;
     private double balance = 0;
     private List<Transaction> transactions;
+    private List<Account> accountList = new ArrayList<>();
 
     public Account(String owner, String accountNumber) {
+        this.owner = owner;
+        this.accountNumber = accountNumber;
+        accountList.add(this);
     }
 
     public String getOwner() {
@@ -46,6 +51,14 @@ public class Account {
         this.transactions = transactions;
     }
 
+    public List<Account> getAccountList() {
+        return accountList;
+    }
+
+    public void setAccountList(List<Account> accountList) {
+        this.accountList = accountList;
+    }
+
     //credit
     public void deposit(double amount) {
         balance += amount;
@@ -53,19 +66,17 @@ public class Account {
 
     //debit
     public void withdraw(double amount) throws InsufficientBalanceException {
-        if(amount<balance){
+        if (amount < balance) {
             balance -= amount;
-        }
-        else{
+        } else {
             throw new InsufficientBalanceException("Bakiye Yetersizdir!");
         }
     }
 
     public void post(Transaction transaction) throws InsufficientBalanceException {
-        if(transaction instanceof WithdrawalTransaction){
+        if (transaction instanceof WithdrawalTransaction) {
             withdraw(transaction.getAmount());
-        }
-        else if(transaction instanceof DepositTransaction) {
+        } else if (transaction instanceof DepositTransaction) {
             deposit(transaction.getAmount());
         }
         transactions.add(transaction);
