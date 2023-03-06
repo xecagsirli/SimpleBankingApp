@@ -22,9 +22,12 @@ public class AccountController {
     Account account;
 
     @GetMapping(value = "/{accountNumber}", produces = "application/json")
-    public ResponseEntity<Account> getAccount(@PathVariable String accountNumber) {
+    public ResponseEntity<Account> getAccount(@PathVariable String accountNumber) throws InsufficientBalanceException {
         Account account1 = null;
         for(int i=0; i<account.getAccountList().size(); i++){
+            if(account.getAccountList().get(i).getAccountNumber() == null || account.getAccountList().get(i).getAccountNumber().isEmpty()){
+                throw new InsufficientBalanceException("AccountNumber Boş Olamaz");
+            }
             if(account.getAccountList().get(i).getAccountNumber().equals(accountNumber))
                 account1 = account.getAccountList().get(i);
         }
@@ -32,7 +35,7 @@ public class AccountController {
     }
 
     @PostMapping(value = "/credit")
-    public ResponseEntity<TransactionStatus> credit(@RequestBody String accountNumber, DepositTransaction depositTransaction ) {
+    public ResponseEntity<TransactionStatus> credit(@RequestBody String accountNumber, DepositTransaction depositTransaction ) throws InsufficientBalanceException {
         Account account = getAccount(accountNumber).getBody();
         account.deposit(depositTransaction.getAmount());
         return ResponseEntity.ok().body(new TransactionStatus("OK"));
